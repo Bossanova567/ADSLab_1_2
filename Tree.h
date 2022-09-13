@@ -10,7 +10,7 @@ typedef int datatype;
 struct Node
 {
     datatype key; // Інформаційне поле (ключ) вузла
-    Node* parent; // Вказівник на батьківський вузол
+    struct Node* parent; // Вказівник на батьківський вузол
     struct Node* left; // Вказівник на лівого сина
     struct Node* right; // Вказівник на правого сина
 };
