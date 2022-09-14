@@ -47,7 +47,7 @@ void InfixOrder(Node* pNode, int level){
 }
 Node* SearchNodeBST(Node* pNode, datatype data){
     while (pNode != NULL) {
-        if (pNode->key != data)
+        if (pNode->key == data)
             return pNode;
         else if (pNode->key > data)
             pNode = pNode->left;
@@ -62,10 +62,9 @@ Node* CreateRootBST(datatype data){
     pNode->parent = pNode->left = pNode->right = NULL;
     return pNode;
 }
-Node* InsertNodeBST(Node* pNode, datatype data){
-    if (SearchNodeBST(pNode, data) == NULL){
+void InsertNodeBST(Node* pNode, datatype data){
+    if (SearchNodeBST(pNode, data) != NULL){
         cout << "The element you want to insert already exists" << endl;
-        return NULL;
     }
     else {
         Node *pNew = new Node;
@@ -74,8 +73,6 @@ Node* InsertNodeBST(Node* pNode, datatype data){
         Node* previous;
         while (pNode != NULL) {
             previous = pNode;
-            if (pNode->key != data)
-                break;
             if (pNode->key > data)
                 pNode = pNode->left;
             else if (pNode->key < data)
@@ -104,5 +101,65 @@ Node* SuccessorNodeBST(Node* pNode){
             previous = previous->parent;
         }
         return previous;
+    }
+}
+Node* PredecessorNodeBST(Node* pNode){
+    if (pNode->left != NULL){
+        Node* previous;
+        previous = pNode->left;
+        while (previous->right != NULL)
+            previous = previous->right;
+        return previous;
+    }
+    else {
+        Node* previous;
+        previous = pNode->parent;
+        while (previous != NULL && pNode == previous->left){
+            pNode = previous;
+            previous = previous->parent;
+        }
+        return previous;
+    }
+}
+void DeleteNodeBST(Node* delNode, Node* root){
+    if (SearchNodeBST(delNode, delNode->key) == NULL)
+        cout << "The element you want to delete doesn't exist" << endl;
+    else
+    {
+        if (delNode->left == NULL && delNode->right == NULL)
+        {
+            if (delNode == root)
+                delete root;
+            else if ((delNode->parent)->left == delNode)
+                (delNode->parent)->left = NULL;
+            else if ((delNode->parent)->right == delNode)
+                (delNode->parent)->right = NULL;
+        }
+        else if (delNode->left != NULL && delNode->right != NULL)
+        {
+            Node* term;
+            term = SuccessorNodeBST(delNode);
+            delNode->key = term->key;
+            DeleteNodeBST(term, root);
+        }
+        else if (delNode->left != NULL || delNode->right != NULL){
+            Node* next;
+            if (delNode->left != NULL)
+                next = delNode->left;
+            else
+                next = delNode->right;
+            if (delNode == root) {
+                root = next;
+                delete delNode;
+            }
+            else {
+                if ((delNode->parent)->left == delNode)
+                    (delNode->parent)->left = next;
+                else if ((delNode->parent)->right == delNode)
+                    (delNode->parent)->right = next;
+                next->parent = delNode->parent;
+                delete delNode;
+            }
+        }
     }
 }

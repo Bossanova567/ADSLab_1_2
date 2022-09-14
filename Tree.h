@@ -20,6 +20,11 @@ void ShowTree(Node* pNode, int level);
 void PrefixOrder(Node* pNode, int level);
 void PostfixOrder(Node* pNode, int level);
 void InfixOrder(Node* pNode, int level);
-
+Node* SearchNodeBST(Node* pNode, datatype data);
+Node* CreateRootBST(datatype data);
+void InsertNodeBST(Node* pNode, datatype data);
+Node* SuccessorNodeBST(Node* pNode);
+Node* PredecessorNodeBST(Node* pNode);
+void DeleteNodeBST(Node* delNode, Node* root);
 
 #endif //ADSLAB_1_TREE_H
