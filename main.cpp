@@ -71,8 +71,16 @@ int main(){
                     int data;
                     cout << "Enter the data:";
                     cin >> data;
-                    DeleteNodeBST(SearchNodeBST(root, data), root);
-                    ShowTree(root, 0);
+                    if (SearchNodeBST(root, data) == root && (SuccessorNodeBST(root) != NULL ||
+                            SuccessorNodeBST(root) != NULL))
+                        cout << "Delete descendants of the root first" << endl;
+                    else {
+                        DeleteNodeBST(SearchNodeBST(root, data), root, data);
+                        if (SearchNodeBST(root, root->key) != NULL)
+                            ShowTree(root, 0);
+                        else
+                            cout << "The BST has been deleted" << endl;
+                    }
                 }
                 else {
                     cout << "You didn't create a Root." << endl;

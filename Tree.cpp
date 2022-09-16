@@ -121,8 +121,8 @@ Node* PredecessorNodeBST(Node* pNode){
         return previous;
     }
 }
-void DeleteNodeBST(Node* delNode, Node* root){
-    if (SearchNodeBST(delNode, delNode->key) == NULL)
+void DeleteNodeBST(Node* delNode, Node* root, datatype data){
+    if (SearchNodeBST(delNode, data) == NULL)
         cout << "The element you want to delete doesn't exist" << endl;
     else
     {
@@ -140,7 +140,7 @@ void DeleteNodeBST(Node* delNode, Node* root){
             Node* term;
             term = SuccessorNodeBST(delNode);
             delNode->key = term->key;
-            DeleteNodeBST(term, root);
+            DeleteNodeBST(term, root, term->key);
         }
         else if (delNode->left != NULL || delNode->right != NULL){
             Node* next;
