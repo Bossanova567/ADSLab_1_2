@@ -25,6 +25,6 @@ Node* CreateRootBST(datatype data);
 void InsertNodeBST(Node* pNode, datatype data);
 Node* SuccessorNodeBST(Node* pNode);
 Node* PredecessorNodeBST(Node* pNode);
-void DeleteNodeBST(Node* delNode, Node* root, datatype data);
+Node* DeleteNodeBST(Node* delNode, Node* root, datatype data);
 
 #endif //ADSLAB_1_TREE_H

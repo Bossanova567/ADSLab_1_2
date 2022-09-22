@@ -17,10 +17,12 @@ Node* CreateTree(int n, datatype data){ // n - кількість вузлів
 void ShowTree(Node* pNode, int level){
     if (pNode != NULL){
         ShowTree(pNode->left, level + 1);
+        //ShowTree(pNode->right, level + 1);
         for (int i = 0;i < level;i++)
             cout << "     ";
         cout << pNode->key;
         cout << endl;
+        //ShowTree(pNode->left, level + 1);
         ShowTree(pNode->right, level + 1);
     }
 }
@@ -121,20 +123,29 @@ Node* PredecessorNodeBST(Node* pNode){
         return previous;
     }
 }
-void DeleteNodeBST(Node* delNode, Node* root, datatype data){
-    if (SearchNodeBST(delNode, data) == NULL)
+Node* DeleteNodeBST(Node* delNode, Node* root, datatype data){
+    if (SearchNodeBST(delNode, data) == NULL){
         cout << "The element you want to delete doesn't exist" << endl;
+        }
     else
     {
         if (delNode->left == NULL && delNode->right == NULL)
         {
             if (delNode == root) {
                 delete root;
+                return NULL;
             }
-            else if ((delNode->parent)->left == delNode)
+            else if ((delNode->parent)->left == delNode) {
                 (delNode->parent)->left = NULL;
-            else if ((delNode->parent)->right == delNode)
+                delete delNode;
+                return root;
+            }
+            else if ((delNode->parent)->right == delNode) {
                 (delNode->parent)->right = NULL;
+                delete delNode;
+                return root;
+            }
+
         }
         else if (delNode->left != NULL && delNode->right != NULL)
         {
@@ -161,6 +172,7 @@ void DeleteNodeBST(Node* delNode, Node* root, datatype data){
                 next->parent = delNode->parent;
                 delete delNode;
             }
+            return root;
         }
     }
 }
