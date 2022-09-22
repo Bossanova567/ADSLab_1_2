@@ -17,10 +17,10 @@ Node* CreateTree(int n, datatype data){ // n - кількість вузлів
 void ShowTree(Node* pNode, int level){
     if (pNode != NULL){
         ShowTree(pNode->left, level + 1);
-        cout<<endl;
         for (int i = 0;i < level;i++)
-            cout << "      ";
+            cout << "     ";
         cout << pNode->key;
+        cout << endl;
         ShowTree(pNode->right, level + 1);
     }
 }
@@ -128,8 +128,9 @@ void DeleteNodeBST(Node* delNode, Node* root, datatype data){
     {
         if (delNode->left == NULL && delNode->right == NULL)
         {
-            if (delNode == root)
+            if (delNode == root) {
                 delete root;
+            }
             else if ((delNode->parent)->left == delNode)
                 (delNode->parent)->left = NULL;
             else if ((delNode->parent)->right == delNode)

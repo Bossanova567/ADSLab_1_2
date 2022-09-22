@@ -11,12 +11,13 @@ int main(){
     cout << "5. Delete a node in BST." << endl;
     cout << "6. Search for a Successor node for a node in BST." << endl;
     cout << "7. Search for  a Predecessor node for a node in BST." << endl;
+    cout << "8. Create an example of BST." << endl;
     cout << "0. Quit." << endl;
     label1:
     cout << endl;
     cout << "Your choice:";
     cin >> choice;
-    if (choice == 0 || choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7) {
+    if (choice == 0 || choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7 || choice == 8) {
         switch (choice) {
             case 0:
                 return 0;
@@ -71,15 +72,15 @@ int main(){
                     int data;
                     cout << "Enter the data:";
                     cin >> data;
-                    if (SearchNodeBST(root, data) == root && (SuccessorNodeBST(root) != NULL ||
-                            SuccessorNodeBST(root) != NULL))
+                    if (SearchNodeBST(root, data) == root && (root->left != NULL ||
+                            root->right != NULL))
                         cout << "Delete descendants of the root first" << endl;
                     else {
                         DeleteNodeBST(SearchNodeBST(root, data), root, data);
-                        if (SearchNodeBST(root, root->key) != NULL)
-                            ShowTree(root, 0);
-                        else
+                        if (SearchNodeBST(root, root->key) == NULL)
                             cout << "The BST has been deleted" << endl;
+                        else
+                            ShowTree(root, 0);
                     }
                 }
                 else {
@@ -112,6 +113,23 @@ int main(){
                     cout << "You didn't create a Root." << endl;
                 }
                 break;
+            case 8:
+                if (root != NULL)
+                    cout << "The Root has already been created." << endl;
+                else {
+                    root = CreateRootBST(25);
+                    InsertNodeBST(root, 36);
+                    InsertNodeBST(root, 30);
+                    InsertNodeBST(root, 28);
+                    InsertNodeBST(root, 40);
+                    InsertNodeBST(root, 38);
+                    InsertNodeBST(root, 48);
+                    InsertNodeBST(root, 20);
+                    InsertNodeBST(root, 22);
+                    InsertNodeBST(root, 10);
+                    InsertNodeBST(root, 12);
+                    InsertNodeBST(root, 5);
+                }
         }
         goto label1;
     }
